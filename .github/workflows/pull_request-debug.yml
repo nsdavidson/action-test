@@ -9,3 +9,4 @@ jobs:
       - uses: nsdavidson/github-action-explore-debug@master
         with:
           jq_selector: ".pull_request"
+          example: ${{ secrets.EXAMPLE }}
