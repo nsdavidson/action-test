@@ -1,12 +1,18 @@
 name: Debug
 on:
-  pull_request:
-    types: [opened, synchronize, closed]
+  push:
+    branches:
+      - main
 jobs:
   output-debug:
     runs-on: ubuntu-18.04
     steps:
-      - uses: nsdavidson/github-action-explore-debug@master
+      - uses: actions/checkout@v2
+
+      - run: mkdir -p output
+      - run: echo hello > output/world.txt
+
+      - uses: actions/upload-artifact@v2
         with:
-          jq_selector: ".pull_request"
-          example: ${{ secrets.EXAMPLE }}
+          name: artifact-out
+          path: output/world.txt
